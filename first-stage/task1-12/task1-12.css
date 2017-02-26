@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "黑体";
+    font-size: 15px;
+}
+
+.container {
+    width: 75%;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #fefefe;
+    box-shadow: 0 0 16px rgba(84,84,84,0.5);
+}
+
+[class*='effect-'] {
+    margin: 20px auto;
+}
+
+table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 50%;
+    margin: auto;
+}
+
+table, th, td {
+    border: 2px solid white;
+}
+
+tbody tr:nth-child(1) td {
+    color: red;
+}
+
+tbody tr:nth-child(2) td {
+    color: red;
+}
+
+tbody tr:nth-child(3) td {
+    color: red;
+}
+
+tbody tr:nth-child(even) td {
+    background-color: #cccccc;
+}
+
+th {
+    background-color: #000;
+    color: white;
+}
+
+input.search {
+    transition: all 0.3s;
+    display: block;
+    border: 1px solid #6d6d6d;
+    border-radius: 5px;
+    width: 200px;
+    height: 30px;
+    margin: auto;
+    text-align: center;
+}
+
+input.search:focus {
+    width: 500px;
+    margin: auto;
+    border: 1px solid rgba(3,169,244,.8);
+    box-shadow: 0 0 10px rgba(3,169,244,.5);
+}
+
+.banner {
+    border: 1px solid #6e6e6e;
+    width: 402px;
+    height: 202px;
+    margin: auto;
+    position: relative;
+}
+
+.content {
+    overflow: hidden;
+    width: 400px;
+    height: 200px;
+    position: relative;
+}
+
+.item {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.item:not(:target) {
+    animation: slideOutLeft 0.5s forwards;
+}
+
+.item:target {
+    animation: slideInRight 0.5s forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        left: 400px;
+        top: 0;
+    }
+    to {
+        left: 0;
+        top: 0;
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        left: 0;
+        top: 0;
+    }
+    to {
+        left: -400px;
+        top: 0;
+    }
+}
+
+#i1 {
+    background-color: rebeccapurple;
+}
+
+#i2 {
+    background-color: aquamarine;
+}
+
+#i3 {
+    background-color: khaki;
+}
+
+.banner-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.banner-btn a {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: gray;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    opacity: 0.6;
+}

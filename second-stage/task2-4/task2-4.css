@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.container {
+    width: 75%;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0 0 10px #8d8d8d;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+}
+
+.control input {
+    height: 2em;
+    border-radius: 5px;
+    border: 1px solid #6d6d6d;
+    margin-right: 10px;
+    text-indent: 1em;
+    transition: box-shadow .1s;
+}
+
+.control input:focus {
+    box-shadow: 0 0 10px rgba(3,169,244,.5);
+}
+
+.btn {
+    display: inline-block;
+    border: 1px solid #6e6e6e;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.btn:hover {
+    background-color: darkgray;
+}
+
+.queue {
+    height: 80px;
+    border: 1px solid #7e7e7e;
+    display: flex;
+    align-items: center;
+}
+
+.item {
+    background-color: cadetblue;
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    color: white;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+.slideInLeft {
+    animation: slideInLeft 1s;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+.slideInRight {
+    animation: slideInRight 1s;
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+.slideOutLeft {
+    animation: slideOutLeft 1s;
+}
+
+@keyframes slideOutRight {
+    from {
+         transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+.slideOutRight {
+    animation: slideOutRight 1s;
+}

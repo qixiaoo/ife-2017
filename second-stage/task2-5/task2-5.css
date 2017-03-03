@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.container {
+    width: 75%;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0 0 10px #8d8d8d;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control input {
+    height: 2em;
+    border-radius: 5px;
+    border: 1px solid #6d6d6d;
+    margin-right: 10px;
+    text-indent: 1em;
+    transition: box-shadow .1s;
+}
+
+.control input:focus {
+    box-shadow: 0 0 10px rgba(3,169,244,.5);
+}
+
+.btn {
+    display: inline-block;
+    border: 1px solid #8e8e8e;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.btn:hover {
+    background-color: darkgray;
+}
+
+.divider {
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.panel {
+    width: 80%;
+    min-height: 300px;
+    margin: 20px auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.item {
+    box-sizing: border-box;
+    width: 60px;
+    /* height由给予的数字动态计算 */
+    margin: 10px 10px 0;
+    border: 1px solid white;
+    border-radius: 5px 5px 0 0;
+    background-color: bisque;
+    color: white;
+    text-align: center;
+    transition: border .3s;
+}
+
+.item:hover {
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 0 5px #e0e0e0;
+}
+
+.item:nth-child(5n+1) {
+    background-color: cadetblue;
+}
+
+.item:nth-child(5n+2) {
+    background-color: bisque;
+}
+
+.item:nth-child(5n+3) {
+    background-color: cornflowerblue;
+}
+
+.item:nth-child(5n+4) {
+    background-color: darkseagreen;
+}
+
+.item:nth-child(5n+2) {
+    background-color: darkkhaki;
+}
+
+@keyframes grow {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+.grow {
+    transform-origin: bottom;
+    animation: grow 1s;
+}
+
+@keyframes shrink {
+    from {
+        transform: scaleY(1);
+    }
+    to {
+        transform: scaleY(0);
+        visibility: hidden;
+    }
+}
+
+.shrink {
+    transform-origin: bottom;
+    animation: shrink .6s;
+}

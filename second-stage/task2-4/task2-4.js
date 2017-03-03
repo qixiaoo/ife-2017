@@ -52,10 +52,20 @@ function rightOut() {
 /* 队列item被点击时的事件处理程序 */
 function removeItem() {
     
+    var item = this;
+    var queue = document.getElementById("queue");
+    
     // 传统方式处理类好麻烦
-    var classes = this.className.split(" ");
+    var classes = item.className.split(" ");
     classes.push("slideOutRight");
-    this.className = classes.join(" ");
+    item.className = classes.join(" ");
+    
+    var handler = setTimeout(function () {
+        
+        queue.removeChild(item);
+        clearTimeout(handler);
+        
+    }, 1000);
     
 }
 

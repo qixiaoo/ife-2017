@@ -25,7 +25,7 @@ function leftOut() {
     var queue = document.getElementById("queue");
     queue.firstElementChild.classList.add("slideOutLeft");
     
-    var handler = setTimeout(function() {
+    var handler = setTimeout(function () {
         
         queue.removeChild(queue.firstElementChild);
         clearTimeout(handler);
@@ -40,7 +40,7 @@ function rightOut() {
     var queue = document.getElementById("queue");
     queue.lastElementChild.classList.add("slideOutRight");
     
-    var handler = setTimeout(function() {
+    var handler = setTimeout(function () {
         
         queue.removeChild(queue.lastElementChild);
         clearTimeout(handler);

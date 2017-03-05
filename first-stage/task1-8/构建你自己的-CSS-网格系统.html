@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="tool" content="leanote-desktop-app">
+<title>构建你自己的 CSS 网格系统</title>
+<style>
+
+*{font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}
+
+body {
+  margin: 0;
+}
+
+/*公用文字样式*/
+h1{font-size:30px}h2{font-size:24px}h3{font-size:18px}h4{font-size:14px}
+.note-container{
+    width:850px; 
+    margin:auto;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 10px #eee;
+}
+#title {
+  margin: 0;
+}
+table {
+    margin-bottom: 16px;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+table th {
+    font-weight: bold;
+}
+
+table tr {
+    background-color: none;
+    border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+    background-color: rgb(247, 247, 249);
+}
+.mce-item-table, .mce-item-table td, .mce-item-table th, .mce-item-table caption {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 6px 13px;
+}
+blockquote {
+  border-left-width:10px;
+  background-color:rgba(128,128,128,0.05);
+  border-top-right-radius:5px;
+  border-bottom-right-radius:5px;
+  padding:15px 20px;
+  border-left:5px solid rgba(128,128,128,0.075);
+}
+blockquote p {
+  margin-bottom:1.1em;
+  font-size:1em;
+  line-height:1.45
+}
+blockquote ul:last-child,blockquote ol:last-child {
+  margin-bottom:0
+}
+pre {
+  padding: 18px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 3px;
+  display: block;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+.footnote {
+  vertical-align: top;
+  position: relative;
+  top: -0.5em;
+  font-size: .8em;
+}
+
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+pre {
+  word-break:break-word
+}
+p,pre,pre.prettyprint,blockquote {
+  margin:0 0 1.1em
+}
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+.sequence-diagram,.flow-chart {
+  text-align:center;
+  margin-bottom:1.1em
+}
+.sequence-diagram text,.flow-chart text {
+  font-size:15px !important;
+  font-family:"Source Sans Pro",sans-serif !important
+}
+.sequence-diagram [fill="#ffffff"],.flow-chart [fill="#ffffff"] {
+  fill:#f6f6f6
+}
+.sequence-diagram [stroke="#000000"],.flow-chart [stroke="#000000"] {
+  stroke:#3f3f3f
+}
+.sequence-diagram text[stroke="#000000"],.flow-chart text[stroke="#000000"] {
+  stroke:none
+}
+.sequence-diagram [fill="#000"],.flow-chart [fill="#000"],.sequence-diagram [fill="#000000"],.flow-chart [fill="#000000"],.sequence-diagram [fill="black"],.flow-chart [fill="black"] {
+  fill:#3f3f3f
+}
+ul,ol {
+  margin-bottom:1.1em
+}
+ul ul,ol ul,ul ol,ol ol {
+  margin-bottom:1.1em
+}
+kbd {
+  padding:.1em .6em;
+  border:1px solid rgba(63,63,63,0.25);
+  -webkit-box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  font-size:.7em;
+  font-family:sans-serif;
+  background-color:#fff;
+  color:#333;
+  border-radius:3px;
+  display:inline-block;
+  margin:0 .1em;
+  white-space:nowrap
+}
+.toc ul {
+  list-style-type:none;
+  margin-bottom:15px
+}
+</style>
+<!-- 该css供自定义样式 -->
+<link href="../leanote-html.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="note-container">
+		<h1 class="title" id="leanote-title">构建你自己的 CSS 网格系统</h1>
+		<div class="content-html" id="leanote-content"><blockquote><p>来自&nbsp;<a title="构建你自己的 CSS 网格系统" href="http://j4n.co/blog/Creating-your-own-css-grid-system" target="_blank" data-mce-href="http://j4n.co/blog/Creating-your-own-css-grid-system">构建你自己的 CSS 网格系统</a>&nbsp;（自翻）</p></blockquote><p>&nbsp;<br></p><h1>构建你自己的 CSS 网格系统</h1><p>&nbsp;<br></p><p>CSS 网格（栅格化）布局已经出现很长一段时间了，但通常它们都是和如同 Bootstrap 一样的 CSS 框架捆绑在一起的。虽然我并不是 Bootstrap 的反对者，但是有时候我们仅仅是想要一个网格系统，而使用 Bootstrap 又太过笨重了。因此，让我们从头开始构建自己的 CSS 网格布局系统。</p><p>&nbsp;<br></p><h2>CSS 网格包含的元素</h2><p>&nbsp;<br></p><p><img src="article-image/589c4d458a3df76815000006.png" alt="" data-mce-src="article-image/589c4d458a3df76815000006.png"></p><p>正如上图所示，一个基本的网格系统只包含以下几个基本要素：</p><ul><li>container&nbsp;</li><li>row</li><li>column</li><li>gutter （位于列之间的空隙）</li></ul><p>&nbsp;<br></p><h2>构建 Container</h2><p>&nbsp;<br></p><p><img src="article-image/589c4ede8a3df76815000007.png" alt="" data-mce-src="article-image/589c4ede8a3df76815000007.png"></p><p>container 的目的是为网格系统设置宽度（width）。通常 container 类的 <code>width</code> 属性的取值是 100%，但是你最好也为 container 设置一个 <code>max-width</code> ，以便让网格更好的应用于更大的设备。</p><blockquote><pre id="leanote_ace_1486639135571_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 84px;">.grid-container&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;width&nbsp;:&nbsp;100%;
+&nbsp;&nbsp;&nbsp;&nbsp;max-width&nbsp;:&nbsp;1200px;&nbsp;
+}</pre></blockquote><p>&nbsp;<br></p><h2>构建&nbsp;Row</h2><p>&nbsp;<br></p><p><img src="article-image/589c50738a3df76815000008.png" alt="" data-mce-src="article-image/589c50738a3df76815000008.png"></p><p>一个 row 即为一行，其作用是避免它所包含的列（column）溢出到其他行中。为了达成这点，我们使用了一个清除浮动的 hack 技巧。代码如下：</p><blockquote><pre id="leanote_ace_1486639522325_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 147px;">/*--&nbsp;our&nbsp;cleafix&nbsp;hack&nbsp;--&nbsp;*/&nbsp;
+.row:before,&nbsp;
+.row:after&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;content:"";
+&nbsp;&nbsp;&nbsp;&nbsp;display:&nbsp;table&nbsp;;
+&nbsp;&nbsp;&nbsp;&nbsp;clear:both;
+}</pre></blockquote><p>&nbsp;<br></p><h2>构建&nbsp;Column</h2><p>&nbsp;<br></p><p><img src="article-image/589c51fb8a3df76815000009.png" alt="" data-mce-src="article-image/589c51fb8a3df76815000009.png"></p><p>column 在整个网格系统中无疑是最复杂的一部分。首先，在 CSS 中存在着好几种不同的定位 column 的方法。其次，我们需要考虑到 column 有着好几种宽度，以及响应式设计的因素。</p><p>在这个教程中，我们会定位 column 元素，并且为它赋予宽度。我会将响应式设计留在后面讲解。</p><p>&nbsp;<br></p><h3>定位 column</h3><p>在 CSS 中，我们有好几种定位 column 的方式，如：<code>float</code> , <code>inline-block</code> , <code>display-table</code> , <code>display-flex</code> 等。从我个人的经验来看，使用最广泛并且出错概率最小的是&nbsp;<code>float</code> 。然而，如果我们的 column 为空， 浮动布局的 column 将会堆叠在彼此的顶部。为了避免这种情况，我们给 column 设置最小高度为1像素，并且让它浮动。</p><blockquote><pre id="leanote_ace_1486640758981_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 84px;">[class*='col-']&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;left;
+&nbsp;&nbsp;&nbsp;&nbsp;min-height:&nbsp;1px;&nbsp;
+}</pre></blockquote><p>&nbsp;<br></p><h3>设置 column 的宽度</h3><p>为了找出一列的宽度，我们所需要做的就是用 container 的宽度除以 column 的数量。在我们的例子中，container 的宽度是 100%，并且我们需要6列。因此，100 / 6 = 16.66，我们的 column 的宽度即为 16.66%。</p><blockquote><pre id="leanote_ace_1486641175290_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 105px;">[class*='col-']&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;left;
+&nbsp;&nbsp;&nbsp;&nbsp;min-height:&nbsp;1px;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;16.66%;&nbsp;
+}</pre></blockquote><p>&nbsp;<br></p><p>当然，这仅仅只是一个开始。如果我们想要一个两列宽的 column （基于上面计算得到的一列宽为 16.66%），计算很简单，100 乘以六分之几即可。</p><blockquote><pre id="leanote_ace_1486641549539_0" class="brush:css ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 399px;">/*&nbsp;6列式网格布局&nbsp;*/
+.col-1&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;16.66%;&nbsp;
+}
+.col-2&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;33.33%;&nbsp;
+}
+.col-3&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;50%;&nbsp;
+}
+.col-4&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;66.664%;
+}
+.col-5&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;83.33%;
+}
+.col-6&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;100%;
+}</pre></blockquote><p>&nbsp;<br></p><p>在使用这个6列式网格进行布局时，我们只需要注意列的宽度加起来为 6 即可。</p><p>&nbsp;<br></p><h3>设置 column 的 gutter</h3><p><img src="article-image/589c5b1e8a3df7681500000a.png" alt="" data-mce-src="article-image/589c5b1e8a3df7681500000a.png"></p><p>&nbsp;在 <code>box-sizing: border-box;</code> 出现之前的传统的 CSS 盒模型中，要为一个宽度是百分数的元素设置一个固定的 padding 是一件非常痛苦的事。幸运的是，使用 border-box 盒模型，我们可以轻松的设置 gutter 。<br></p><blockquote><pre id="leanote_ace_1486642658710_0" class="brush:css ace-tomorrow">/*--&nbsp;让网格系统中的所有元素都使用&nbsp;border-box&nbsp;盒模型&nbsp;--*/
+.grid-container&nbsp;*{
+&nbsp;&nbsp;&nbsp;&nbsp;box-sizing:&nbsp;border-box;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;/*&nbsp;为了兼容，最好加上浏览器前缀&nbsp;*/
+}
+
+[class*='col-']&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;left;
+&nbsp;&nbsp;&nbsp;&nbsp;min-height:&nbsp;1px;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;16.66%;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;/*--&nbsp;我们的&nbsp;gutter&nbsp;的宽度&nbsp;--*/
+&nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;12px;
+}</pre></blockquote><p>&nbsp;<br></p><p>（就个人喜好来说，我更喜欢让自己页面的元素都是用 border-box 盒模型）&nbsp;<br></p><p>&nbsp;<br></p><h2>现在我们的网格系统已经初步完成了</h2><p>&nbsp;<br></p><h3>CSS&nbsp;</h3><blockquote><pre id="leanote_ace_1486643391711_0" class="brush:css ace-tomorrow" draggable="false">.grid-container {
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;100%;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;max-width:&nbsp;1200px;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}
+
+/*--&nbsp;our&nbsp;cleafix&nbsp;hack&nbsp;--&nbsp;*/&nbsp;
+.row:before,&nbsp;
+.row:after&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;content:"";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display:&nbsp;table&nbsp;;
+&nbsp;&nbsp;&nbsp;&nbsp;clear:both;
+}
+
+[class*='col-']&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;left;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;min-height:&nbsp;1px;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;16.66%;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;/*--&nbsp;our&nbsp;gutter&nbsp;--&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;12px;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;background-color:&nbsp;#FFDCDC;
+}
+
+.col-1 {&nbsp;width:&nbsp;16.66%;&nbsp;}
+.col-2 {&nbsp;width:&nbsp;33.33%;&nbsp;}
+.col-3 {&nbsp;width:&nbsp;50%;&nbsp;&nbsp;&nbsp;&nbsp;}
+.col-4 {&nbsp;width:&nbsp;66.66%;&nbsp;}
+.col-5 {&nbsp;width:&nbsp;83.33%;&nbsp;}
+.col-6 {&nbsp;width:&nbsp;100%;&nbsp;&nbsp;&nbsp;}
+
+.outline,&nbsp;.outline&nbsp;* {
+&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;1px&nbsp;solid&nbsp;#F6A1A1;&nbsp;
+}
+
+/*--&nbsp;some&nbsp;extra&nbsp;column&nbsp;content&nbsp;styling&nbsp;--*/
+[class*='col-']&nbsp;&gt;&nbsp;p&nbsp;{
+&nbsp;background-color:&nbsp;#FFC2C2;&nbsp;
+&nbsp;padding:&nbsp;0;
+&nbsp;margin:&nbsp;0;
+&nbsp;text-align:&nbsp;center;&nbsp;
+&nbsp;color:&nbsp;white;&nbsp;
+}&nbsp;</pre></blockquote><p>&nbsp;<br></p><h3>html</h3><blockquote><pre id="leanote_ace_1486643230438_0" class="brush:html ace-tomorrow" draggable="false">&lt;div&nbsp;class="grid-container&nbsp;outline"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="row"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="row"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-2"&gt;&lt;p&gt;col-2&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-2"&gt;&lt;p&gt;col-2&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-2"&gt;&lt;p&gt;col-2&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="row"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-3"&gt;&lt;p&gt;col-3&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class="col-3"&gt;&lt;p&gt;col-3&lt;/p&gt;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr/&gt;</pre></blockquote><p>&nbsp;<br></p><h3>效果</h3><p><img src="article-image/589c61568a3df7681500000b.png" alt="" data-mce-src="article-image/589c61568a3df7681500000b.png"></p><p>&nbsp;<br></p><p>&nbsp;<br></p><h1>part 2：构建响应式的网格系统</h1><p>&nbsp;<br></p><p>为了让你的网格系统适用于手机端的布局，我们只需要修改一下列的宽度即可。</p><p>简单起见，我要将列的宽度加倍以适用于800px以下的屏幕。</p><p>唯一需要我们注意的是，当 column 位于一行的末尾时存在着一些特殊情况。比如，处于一行末尾的 <code>.col-2</code>&nbsp;或者紧邻着 <code>.col-5</code> 的 <code>.col-1</code>&nbsp;。（列宽加倍后，&nbsp;<code>.col-5</code> 本身已经为 100%，其后的 <code>.col-1</code> 自然不能取 33.33%；同理，加倍后的 <code>.col-4</code> 本身即为 100%，其后的 <code>.col-2</code> 的宽度自然不能取 50%）</p><p>为了解决这个问题，我会把处于一行末尾的 <code>.col-2</code> 与紧邻 <code>.col-5</code> 的 <code>.col-1</code> 的宽度设置为 100%。</p><blockquote><pre id="leanote_ace_1486645534599_0" class="brush:css ace-tomorrow" draggable="false">@media all and (max-width:800px) {
+    .col-1 {
+        width: 33.33%;
+    }
+    .col-2 {
+        width: 50%;
+    }
+    .col-3 {
+        width: 83.33%;
+    }
+    .col-4 {
+        width: 100%;
+    }
+    .col-5 {
+        width: 100%;
+    }
+    .col-6 {
+        width: 100%;
+    }
+    .row .col-2:last-of-type {
+        width: 100%;
+    }
+    .row .col-5 ~ .col-1 {
+        width: 100%;
+    }
+}</pre></blockquote><p><br data-mce-bogus="1"></p><p>为了适应哪些屏宽小于 800px 的设备，我们将除 <code>.col-1</code> 的所有 column 的宽度均设为 100%。</p><blockquote><pre id="leanote_ace_1486646014638_0" class="brush:css ace-tomorrow" draggable="false">@media all and (max-width:650px) {
+    .col-1 { width: 50%;        }
+    .col-2 { width: 100%;    }
+    .col-3 { width: 100%;    }
+    .col-4 { width: 100%;    }
+    .col-5 { width: 100%;    }
+    .col-6 { width: 100%;      }
+}</pre></blockquote><p><br data-mce-bogus="1"></p><p>以上就是所有的内容了，我们没有使用框架，而是构建了一个属于自己的响应式网格系统。</p><p><br data-mce-bogus="1"></p><h2>效果</h2><p><br data-mce-bogus="1"></p><h3>html</h3><blockquote><pre id="leanote_ace_1486646230460_0" class="brush:html ace-tomorrow">&lt;div class="grid-container outline"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt; 
+    &lt;/div&gt; 
+    &lt;div class="row"&gt;
+        &lt;div class="col-2"&gt;&lt;p&gt;col-2&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-2"&gt;&lt;p&gt;col-2&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-2"&gt;&lt;p&gt;col-2&lt;/p&gt;&lt;/div&gt; 
+    &lt;/div&gt; 
+    &lt;div class="row"&gt;
+        &lt;div class="col-3"&gt;&lt;p&gt;col-3&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-3"&gt;&lt;p&gt;col-3&lt;/p&gt;&lt;/div&gt; 
+    &lt;/div&gt; 
+    &lt;div class="row"&gt;
+        &lt;div class="col-4"&gt;&lt;p&gt;col-4&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-2"&gt;&lt;p&gt;col-2&lt;/p&gt;&lt;/div&gt; 
+    &lt;/div&gt; 
+    &lt;div class="row"&gt;
+        &lt;div class="col-5"&gt;&lt;p&gt;col-5&lt;/p&gt;&lt;/div&gt; 
+        &lt;div class="col-1"&gt;&lt;p&gt;col-1&lt;/p&gt;&lt;/div&gt; 
+    &lt;/div&gt; 
+    &lt;div class="row"&gt;
+        &lt;div class="col-6"&gt;&lt;p&gt;col-6&lt;/p&gt;&lt;/div&gt; 
+    &lt;/div&gt; 
+&lt;/div&gt;</pre></blockquote><p><br data-mce-bogus="1"></p><p><strong>请注意，本指南只是创建自己的网格系统的起点。 它不是一个框架，甚至不是一个完整的解决方案，但我希望它确实揭示了创建一个 CSS 网格系统的过程。</strong></p></div>
+	</div>
+
+<!-- 该js供其它处理 -->
+<script src="../leanote-html.js"></script>
+</body>
+</html>

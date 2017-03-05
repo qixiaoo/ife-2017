@@ -72,6 +72,16 @@ function clear() {
     document.getElementById("panel").innerHTML = "";
 }
 
+/* 清空动画效果 */
+function clearAnimation() {
+    
+    var items = document.getElementById("panel").childNodes;
+    
+    for (var i = 0; i < items.length; i++) {
+        items[i].classList.remove("grow");
+    }
+}
+
 /* 排序按钮的事件处理程序（使用冒泡排序） */
 function sort() {
 
@@ -85,8 +95,13 @@ function sort() {
     for (var i = 0; i < panel.childNodes.length; i++)
         itemArray[i] = panel.childNodes[i];
 
-    // 遍历排序
-    for (i = 0; i < itemArray.length - 1; i++) {
+    // 用 setInterval 函数代替for循环来遍历排序        
+    i = 0;
+    var handler = setInterval(function () {
+
+        if (i >= itemArray.length - 1) {
+            clearInterval(handler);
+        }
 
         var flag = 0; // 若一轮比较未发生交换，则说明顺序已排好，flag 为判断是否发生交换的标记
 
@@ -97,8 +112,8 @@ function sort() {
 
             if (a > b) {
 
+                clearAnimation();
                 panel.insertBefore(itemArray[j + 1], itemArray[j]);
-                itemArray[j + 1].classList.remove("grow");
                 itemArray[j + 1].classList.add("grow");
 
                 item = itemArray[j + 1];
@@ -109,9 +124,12 @@ function sort() {
             }
         }
 
+        i++;
+
         if (flag == 1) flag = 0;
-        else break;
-    }
+        else clearInterval(handler);
+        
+    }, 500);
 
     return false;
 }

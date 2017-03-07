@@ -95,8 +95,11 @@ function renderQueue() {
 
     var handler = setInterval(function () {
 
-        if (i >= animationQueue.length)
+        if (i >= animationQueue.length) {
             clearInterval(handler);
+            animationQueue[i - 1].classList.remove("mark"); // 清除上一次遍历的痕迹
+            return;
+        }
 
         if (i != 0)
             animationQueue[i - 1].classList.remove("mark"); // 清除上一次遍历的痕迹

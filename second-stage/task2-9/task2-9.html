@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>任务八：JavaScript和树（二）</title>
+    <link rel="stylesheet" href="task2-9.css">
+</head>
+
+<body>
+
+    <h2>树的遍历展示</h2>
+
+    <div class="container">
+        <div class="control">
+            <input type="text" id="search" placeholder="输入查询的内容">
+            <a href="#!" class="btn" id="find">搜索</a>
+            <a href="#!" class="btn" id="pre-order">前序遍历</a>
+            <a href="#!" class="btn" id="post-order">后序遍历</a>
+
+        </div>
+
+        <div class="control">
+            <input type="text" id="data" placeholder="输入要添加的内容">
+            <a href="#!" class="btn" id="add">添加</a>
+            <a href="#!" class="btn" id="delete" title="删除选中节点">删除</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="panel" id="panel">
+            <div class="tree" id="tree">
+                <div class="node">
+                    super
+                    <div class="node">cat
+                        <div class="node">apple
+                            <div class="node">peer</div>
+                            <div class="node">pig</div>
+                        </div>
+                        <div class="node">phone</div>
+                        <div class="node">
+                            <div class="node">book</div>
+                            <div class="node">school</div>
+                        </div>
+                    </div>
+                    <div class="node">note
+                        <div class="node">human
+                            <div class="node">code</div>
+                            <div class="node">man
+                            </div>
+                        </div>
+                        <div class="node">program</div>
+                    </div>
+                    <div class="node">fish</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="task2-9.js"></script>
+
+</body>
+
+</html>

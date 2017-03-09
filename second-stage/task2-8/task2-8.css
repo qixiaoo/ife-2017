@@ -87,7 +87,7 @@ h2 {
     width: 45%;
     height: 90%;
     background-color: white;
-    font-size: 5px;
+    font-size: 10px;
     transition: background-color .5s, border .5s;
 }
 

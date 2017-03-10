@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 85%;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.panel {
+    padding: 20px;
+    box-shadow: 0 0 10px 0 #d3d3d3, 0 0 0 1px #d3d3d3;
+}
+
+.row {
+    margin: 30px auto;
+}
+
+input[type=radio] {
+    display: none;
+}
+
+input[type=radio] + label {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    text-indent: 30px;
+    margin: 0 60px;
+}
+
+input[type=radio] + label:before {
+    content: "";
+    background: #f3f3f3;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 100%;
+    left: 0;
+}
+
+input[type=radio]:checked + label:before {
+    background: url(http://p1.bqimg.com/567571/28cf7b84bf5bed32.png) center center no-repeat #f3f3f3;
+}
+
+label {
+    margin-right: 20px;
+}
+
+select {
+    /* 清除默认的箭头 */
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    
+    margin-right: 30px;
+    color: #757a7a;
+    background-color: #f7f7f7;
+    background: url(http://p1.bqimg.com/567571/506dc58631a6898b.png) right center no-repeat;
+    min-width: 12rem;
+}
+
+select:focus {
+    color: black;
+    background-color: white;
+}
+
+input[type=text] {
+    min-width: 30rem;
+}
+
+select, input[type=text] {
+    font-size: 14px;
+    height: 2.2rem;
+    outline: none;
+    padding-left: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 0 rgba( 229, 229, 229, 0.531 );
+    transition: box-shadow .3s;
+}
+
+select:focus, input[type=text]:focus {
+    box-shadow: inset 0 1px 0 rgba( 229, 229, 229, 0.531 ), 0 0 6px 0 #357EF8;
+}
+
+.center {
+    text-align: center;
+}

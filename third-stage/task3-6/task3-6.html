@@ -1,0 +1,68 @@
+<!DOCTYpE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>任务六：UI组件之浮出层</title>
+    <link rel="stylesheet" href="task3-6.css">
+</head>
+
+<body>
+
+    <main>
+        <div class="container">
+            <div class="panel">
+                <h3>博物馆</h3>
+                <p>这里有餐盘而无食欲。</p>
+                <p>有结婚戒指，然爱情至少已三百年</p>
+                <p>未获回报。</p>
+                <p>这里有一把扇子——粉红的脸蛋哪里去了？</p>
+                <p>这里有几把剑——愤怒哪里去了？</p>
+                <p>黄昏时分鲁特琴的弦音不再响起。</p>
+                <p class="space"></p>
+                <p>因为永恒缺货</p>
+                <p>十万件古物在此聚合。</p>
+                <p>土里土气的守卫美梦正酣，</p>
+                <p>他的短髭撑靠在展示橱窗上。</p>
+                <p class="space"></p>
+                <p>金属，陶器，鸟的羽毛</p>
+                <p>无声地庆祝自己战胜了时间。</p>
+                <p>只有古埃及黄毛丫头的发夹嗤嗤傻笑。</p>
+                <p class="space"></p>
+                <p>王冠的寿命比头长。</p>
+                <p>手输给了手套。</p>
+                <p>右脚的鞋打败了脚。</p>
+                <p class="space"></p>
+                <p>至于我，你瞧，还活着。</p>
+                <p>和我的衣服的竞赛正如火如荼进行着。</p>
+                <p>这家伙战斗的意志超乎想象！</p>
+                <p>它多想在我离去之后继续存活！</p>
+                <div class="panel-footer center">
+                    <button class="btn modal-trigger" modal-target="modal1">了解更多</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+   <!-- 模态框应该放在<main>标签外 -->
+    <div class="modal" id="modal1">
+        <div class="modal-header">
+            这是一个浮出层
+        </div>
+        <div class="modal-content">
+            这是一个浮出层
+        </div>
+        <div class="modal-footer">
+            <button class="btn modal-close" modal-target="modal1">
+                确定
+            </button>
+            <button class="btn modal-close" modal-target="modal1">
+                取消
+            </button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="task3-6.js"></script>
+</body>
+
+</html>

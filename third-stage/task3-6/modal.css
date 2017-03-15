@@ -1,0 +1,74 @@
+/*
+ * modal.css 可以在页面上创建一个模态框，需要与 modal.js 一起使用
+ *
+ * 使用说明：
+ * 
+ * 首先需要在 HTML 中引入文件 modal.css 和 modal.js
+ * 然后，使用时需要在 <body> 标签下创建一个 <div class="moadl" id="modalId"></div> 
+ *
+ * 另外，你可以为一个元素加上 .modal-trigger 类，就可以把这个元素作为打开模态框的触发器
+ * 同理，加上 .modal-close 类的元素可以在被点击后关闭模态框
+ * 注意：你还要为上面的元素加上 modal-target 属性，属性值为要打开/关闭的模态框的id
+ */
+
+.modal {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.7, 0.7);
+    position: fixed;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    height: min-content;
+    min-height: 50px;
+    max-height: 70%;
+    background-color: white;
+    overflow-y: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 1px #666;
+    z-index: 999;
+    transition-property: all;
+    transition-duration: .5s;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.modal-content {
+    margin: 10px auto;
+}
+
+.modal-footer {
+    text-align: center;
+    margin: 10px auto;
+}
+
+.modal-overlay {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    transition-property: all;
+    transition-duration: .5s;
+}
+
+main {
+    transition: filter .3s;
+}
+
+.mask {
+    filter: blur(5px);
+}

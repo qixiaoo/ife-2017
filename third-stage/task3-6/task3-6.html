@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>任务六：UI组件之浮出层</title>
     <link rel="stylesheet" href="task3-6.css">
+    <link rel="stylesheet" href="modal.css">
 </head>
 
 <body>
@@ -13,6 +14,7 @@
         <div class="container">
             <div class="panel">
                 <h3>博物馆</h3>
+                <p class="author">辛波丝卡</p>
                 <p>这里有餐盘而无食欲。</p>
                 <p>有结婚戒指，然爱情至少已三百年</p>
                 <p>未获回报。</p>
@@ -44,14 +46,17 @@
         </div>
     </main>
 
-   <!-- 模态框应该放在<main>标签外 -->
+    <!-- 模态框应该放在<main>标签外 -->
     <div class="modal" id="modal1">
         <div class="modal-header">
-            这是一个浮出层
+            维斯瓦娃·辛波丝卡
         </div>
+        <div class="divider"></div>
         <div class="modal-content">
-            这是一个浮出层
+            <p>维斯瓦娃·辛波丝卡（Wislawa Szymborska，1923-2012），波兰女作家，同时也是位杰出的翻译家，将许多优秀的法国诗歌翻译成波兰语，并于1996年荣获诺贝尔文学奖，其诗作被称为“具有不同寻常和坚韧不拔的纯洁性和力量”。有《一见钟情》，《呼唤雪人》等著作。</p>
+            <p style="text-align: right;">————以上来自百度百科</p>
         </div>
+        <div class="divider"></div>
         <div class="modal-footer">
             <button class="btn modal-close" modal-target="modal1">
                 确定
@@ -62,6 +67,7 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="modal.js"></script>
     <script type="text/javascript" src="task3-6.js"></script>
 </body>
 

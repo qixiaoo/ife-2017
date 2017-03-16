@@ -56,14 +56,12 @@ var modal = {
             overlay = document.getElementsByClassName("modal-overlay")[0];
             overlay.style.visibility = "visible";
             overlay.style.opacity = this.property.opacity;
-            document.getElementsByTagName("main")[0].className = "mask";
         }
 
         if (operation === "close") {
             overlay = document.getElementsByClassName("modal-overlay")[0];
             overlay.style.visibility = "hidden";
             overlay.style.opacity = "0";
-            document.getElementsByTagName("main")[0].className = "";
         }
     },
 

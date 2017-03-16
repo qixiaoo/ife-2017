@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.panel {
+    padding: 20px;
+    box-shadow: 0 0 8px .5px #eee;
+    border-radius: 5px;
+}
+
+table, td, th {
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.order-table {
+    border-collapse: collapse;
+    width: 70%;
+    margin: auto;
+}
+
+.order-table th {
+    min-width: 6rem;
+    min-height: 3rem;
+    padding: 10px;
+}
+
+.order-table td {
+    padding: 10px;
+}
+
+.order-control {
+    background: url(http://i1.piimg.com/567571/dbdc72d98cf74ee1.png) right center no-repeat;
+}

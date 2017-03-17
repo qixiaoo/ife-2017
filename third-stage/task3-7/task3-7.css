@@ -15,8 +15,15 @@
 }
 
 table, td, th {
-    border: 1px solid #e0e0e0;
     text-align: center;
+}
+
+tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tbody > tr:nth-child(odd) {
+    background-color: #f2f2f2;
 }
 
 .order-table {
@@ -36,5 +43,11 @@ table, td, th {
 }
 
 .order-control {
-    background: url(http://i1.piimg.com/567571/dbdc72d98cf74ee1.png) right center no-repeat;
+    cursor: pointer;
+    position: relative;
+    transition: all .3s;
+}
+
+.order-control:hover {
+    background-color: #f4f4f4;
 }

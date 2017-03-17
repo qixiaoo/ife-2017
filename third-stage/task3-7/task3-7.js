@@ -69,13 +69,6 @@ var orderTable = {
     },
 
     /**
-     * 根据传入参数设置表格样式
-     */
-    style: function (tableId, option) {
-        // TODO
-    },
-
-    /**
      * 默认的大小比较方法（为null时，sort 函数会使用数组默认的按比较字符串排序）
      */
     compare: null,
@@ -84,7 +77,11 @@ var orderTable = {
      * 用户自定义大小比较方法
      */
     setCompare: function (fun) {
-        this.compare = fun;
+        this.compare = function (tdA, tdB) {
+            var a = tdA.innerHTML;
+            var b = tdB.innerHTML;
+            return fun(a, b);
+        }
     },
 
     /**
@@ -98,26 +95,45 @@ var orderTable = {
      * 排序
      */
     sort: function () {
+
         var table = orderTable._getParentTable(this);
         var index = orderTable._getTdIndex(this);
         var trs = table.getElementsByTagName("tr");
-        var datas = [];
-        var text, tds;
+        trs = Array.prototype.slice.call(trs, 0); // 把 NodeList 转化为数组
+
+        var tdList = [],
+            ths, tr, tbody;
+
+
+        tbody = table.getElementsByTagName("tbody")[0];
+        tbody.innerHTML = "";
+        ths = trs[0].getElementsByTagName("th");
 
         for (var i = 1; i < trs.length; i++) {
-            tds = trs[i].getElementsByTagName("td");
-            text = tds[index].innerHTML;
-            datas.push(text);
+            tdList[i - 1] = trs[i].getElementsByTagName("td")[index];
         }
 
-        if (orderTable.compare !== null)
-            datas.sort(orderTable.compare);
-        else
-            datas.sort();
+        for (i = 0; i < ths.length; i++) {
+            if (ths[i] !== this)
+                ths[i].removeAttribute("order");
+        }
 
-        for (i = 1; i < trs.length; i++) {
-            tds = trs[i].getElementsByTagName("td");
-            tds[index].innerHTML = datas[i - 1];
+        // 未定义compare时，使用默认的比较字符串来排序
+        if (orderTable.compare !== null)
+            tdList.sort(orderTable.compare);
+        else
+            tdList.sort();
+
+        if (this.getAttribute("order") === "mark") {
+            tdList.reverse();
+            this.removeAttribute("order");
+        } else {
+            this.setAttribute("order", "mark");
+        }
+
+        for (i = 0; i < tdList.length; i++) {
+            tr = tdList[i].parentNode;
+            tbody.appendChild(tr);
         }
     },
 
@@ -134,12 +150,17 @@ var orderTable = {
 }
 
 window.onload = function () {
-    orderTable.init("table1");
+
+    var json_str = "{\"小红\":[\"小红\",11,22,33,44,55],\"小明\":[\"小明\",23,34,45,56,67],\"小强\":[\"小强\",33,75,95,74,83],\"小智\":[\"小智\",26,86,97,83,88],\"小刚\":[\"小刚\",66,85,73,91,77],\"小瑶\":[\"小瑶\",93,84,72,62,82]}";
     
-    orderTable.setCompare(function(a, b) {
+    orderTable.createTable("table1", json_str); // 创建表格
+
+    // 自定义表格中内容大小比较规则
+    orderTable.setCompare(function (a, b) {
+
         a = parseFloat(a);
         b = parseFloat(b);
-        
+
         if (a > b)
             return 1;
         else if (a < b)

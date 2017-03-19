@@ -1,0 +1,120 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.content {
+    position: relative;
+    width: min-content;
+    margin: auto;
+    overflow: hidden;
+}
+
+img {
+    display: block;
+    z-index: -1;
+}
+
+.content:hover > .text {
+    opacity: 1;
+}
+
+.content:hover > img {
+    opacity: .5;
+    transition: opacity .5s;
+}
+
+.text {
+    opacity: 0;
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: opacity .5s;
+}
+
+.text > p {
+    text-align: center;
+    font-size: 35px;
+    font-weight: 900;
+    background-image: -webkit-linear-gradient(left, blue, red 25%, blue 50%, red 75%, blue 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-size: 200% 100%;
+    animation: streamer 3s infinite linear;
+}
+
+@keyframes streamer {
+    0%  {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+.text:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 0;
+    border: 3px solid ghostwhite;
+    border-width: 0 3px;
+    visibility: hidden;
+    box-sizing: border-box;
+    transition: all .5s;
+}
+
+.content:hover .text:before {
+  height: 100%;
+  visibility: visible;
+  top: 0;
+}
+
+.text:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 0;
+    height: 100%;
+    border: 3px solid ghostwhite;
+    border-width: 3px 0;
+    visibility: hidden;
+    box-sizing: border-box;
+    transition: all .5s;
+}
+
+.content:hover .text:after {
+  width: 100%;
+  visibility: visible;
+  left: 0;
+}
+
+.content:hover:before {
+    content: '';
+    background: url(img/leaf2.png);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: blur(5px);
+}

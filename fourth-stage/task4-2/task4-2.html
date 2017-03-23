@@ -7,54 +7,56 @@
 </head>
 
 <body>
+
+    <h3 style="text-align: center;">按 F12 打开开发者工具查看结果</h3>
+
     <script>
-        
         // Observer 的构造函数
         function Observer(data) {
             this.data = data;
             this.walk(data);
         }
-        
+
         var p = Observer.prototype; // 构造函数的原型对象
-        
+
         // 遍历对象自己拥有的属性，为它们添加访问器方法
-        p.walk = function (obj) {
+        p.walk = function(obj) {
             var key,
                 val;
-            
+
             // 遍历对象的属性
             for (key in obj) {
                 // 获取对象本身拥有的属性
                 if (obj.hasOwnProperty(key)) {
                     val = obj[key];
-                    
+
                     if (typeof val === "object") {
                         new Observer(val); // 如果属性仍然为对象，则递归遍历
                     }
-                    
+
                     this.convert(key, val); // 用 this 调用 convert 函数，为拥有属性的对象添加访问器属性
                 }
             }
         }
-        
+
         // 为对象添加访问器属性
-        p.convert = function (key, val) {
+        p.convert = function(key, val) {
             Object.defineProperty(this.data, key, {
                 enumerable: true,
                 configurable: true,
                 // get 和 set 函数是个闭包，可以通过它们访问 val，使 val 驻留在内存中
-                get: function () {
+                get: function() {
                     console.log("你访问了 " + key);
                     return val;
                 },
-                set: function (newVal) {
+                set: function(newVal) {
                     console.log("你设置了 " + key + "，新的值为 " + newVal);
                     val = newVal;
                 }
             });
         }
-        
-        
+
+
         // 以下为测试部分
         let app1 = new Observer({
             name: 'youngwind',

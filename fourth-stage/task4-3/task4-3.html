@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>动态数据绑定（二）</title>
+</head>
+
+<body>
+
+    <h3 style="text-align: center;">按 F12 打开开发者工具查看结果</h3>
+
+    <script>
+        // Observer 的构造函数
+        function Observer(data) {
+            this.data = data;
+            this.walk(data);
+        }
+
+        var p = Observer.prototype; // 构造函数的原型对象
+
+        // handlers 对象以事件名作为属性名，绑定的回调函数数组作为属性值
+        p.handlers = {};
+
+        // 注册监听的函数
+        p.$watch = function(event, handler) {
+            var self = this;
+
+            // 若 handlers 不存在此事件，则添加进去
+            if (!(event in self.handlers)) {
+                self.handlers[event] = [];
+            }
+            self.handlers[event].push(handler); // 将事件处理程序加入回调函数数组
+            return this;
+        };
+
+        // 取消对事件的监听
+        p.$detach = function(event) {
+            var self = this;
+
+            for (var key in self.handlers) {
+                if (self.handlers.hasOwnProperty(key) && key == event) {
+                    delete self.handlers[key];
+                }
+            }
+        }
+
+        // 发布事件的函数
+        p.emit = function(event) {
+            var self = this;
+            var handlerArgs = Array.prototype.slice.call(arguments, 1); // 回调函数的参数数组
+
+            // 若没有函数监听此事件，返回
+            if (!(event in self.handlers))
+                return self;
+
+            // 依次调用所有回调函数
+            for (var i = 0; i < self.handlers[event].length; i++) {
+                self.handlers[event][i].apply(self, handlerArgs);
+            }
+            return self;
+        };
+
+        // 遍历对象自己拥有的属性，为它们添加访问器方法
+        p.walk = function(obj) {
+            var key,
+                val;
+
+            // 遍历对象的属性
+            for (key in obj) {
+                // 获取对象本身拥有的属性
+                if (obj.hasOwnProperty(key)) {
+                    val = obj[key];
+
+                    if (typeof val === "object") {
+                        new Observer(val); // 如果属性仍然为对象，则递归遍历
+                    }
+
+                    this.convert(key, val); // 用 this 调用 convert 函数，为拥有属性的对象添加访问器属性
+                }
+            }
+        };
+
+        // 为对象添加访问器属性
+        p.convert = function(key, val) {
+            var self = this;
+
+            Object.defineProperty(self.data, key, {
+                enumerable: true,
+                configurable: true,
+                // get 和 set 函数是个闭包，可以通过它们访问 val，使 val 驻留在内存中
+                get: function() {
+                    console.log("你访问了 " + key);
+                    return val;
+                },
+                set: function(newVal) {
+                    console.log("你设置了 " + key + "，新的值为 " + newVal);
+
+                    if (typeof newVal === "object" && newVal !== null) {
+                        // 为对象的属性绑定访问器属性
+                        new Observer(newVal);
+                    }
+
+                    // 发布事件
+                    self.emit(key + "", newVal);
+
+                    val = newVal;
+                }
+            });
+        };
+
+
+        // 以下为测试部分
+        let app1 = new Observer({
+            name: 'youngwind',
+            age: 25
+        });
+
+        let app2 = new Observer({
+            color: {
+                type1: "red",
+                type2: "green",
+                type3: "blue"
+            },
+            size: "large"
+        });
+
+        app1.$watch("name", function(name) {
+            console.log("我的名字变了，也变强了");
+        });
+
+        app1.$watch("age", function(age) {
+            console.log(`我的年纪变了，现在已经是：${age}岁了`);
+        });
+
+        app2.$watch("type1", function(type1) {
+            console.log(`第一种颜色变了，现在是${type1}了`);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 75%;
+    margin: 30px auto;
+}
+
+.panel {
+    padding: 20px;
+    box-shadow: 0 0 10px 1px #cccccc;
+    text-align: center;
+}
+
+.control {
+    margin: 20px;
+}
+
+.control > label {
+    margin: 0 20px;
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    text-indent: 2em;
+}
+
+label.radio:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background: url(imgs/icon.png) -24px -10px no-repeat;
+}
+
+input[type="radio"]:checked + label.radio:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background: url(imgs/icon.png) -59px -10px no-repeat;
+}
+
+label.checkbox:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background: url(imgs/icon.png) -24px -32px no-repeat;
+}
+
+input[type="checkbox"]:checked + label.checkbox:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background: url(imgs/icon.png) -59px -32px no-repeat;
+}
+
+.control input[type="radio"],
+.control input[type="checkbox"] {
+    display: none;
+}

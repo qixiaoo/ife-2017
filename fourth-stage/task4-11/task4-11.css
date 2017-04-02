@@ -102,3 +102,27 @@ h6
 .preview ul {
     padding-left: 2em;
 }
+
+.btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    border: 1px solid black;
+    outline: none;
+    background: url(image/arrow.png) center center no-repeat;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #e0e0e0;
+}
+
+.fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}

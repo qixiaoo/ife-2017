@@ -11,19 +11,45 @@
        
         <div class="markdown-editor">
             <div class="text-side">
-                <textarea class="editor" id="editor"></textarea>
+                <textarea class="editor" id="editor">> 正则表达式之简易 markdown 文件解析器
+
+# 这是一个标题
+
+这是一段测试文本。
+
+这是一个列表：
+
+* something
+* something
+* something
+
+下面是一个代码块：
+
+```js
+setTimeout(function () {
+    // do something
+    setTimeout(arguments.callee, interval);
+}, interval);
+```
+
+下面是一张图片：
+![22](http://p1.bpimg.com/567571/04a84a624ee98844.png)
+
+这是一个测试用的段落，其间包含一些`code`，还包含一些[链接](http://www.baidu.com)。这段话中包含一些被强调文本，如 *em*，或者 **strong**。
+## 存在的一些问题
+
+* 目前 and 今后都不会支持表格
+* 转义字符不能成功转义
+* 发现自己的审美是影响自己做一个好看界面的大问题 〒▽〒
+* 代码较为凌乱。。。</textarea>
             </div>
             <div class="preview-side">
-                <div class="preview" id="preview">
-                    
-                </div>
+                <div class="preview" id="preview"></div>
             </div>
         </div>
         
-        <button class="btn fixed"></button>
-        
     </main>
     
-    <script type="text/javascript" src="task4-11.js"></script>
+    <script type="text/javascript" src="md.js"></script>
 </body>
 </html>

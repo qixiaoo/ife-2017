@@ -1,7 +1,7 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: '黑体';
+    font-family: "Roboto", sans-serif, '黑体';
 }
 
 .markdown-editor {
@@ -23,65 +23,58 @@
     padding: 10px;
 }
 
-
 .editor {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    
+
     resize: none;
     overflow: auto;
     outline: none;
     background-color: beige;
     flex-grow: 1;
     padding: 30px;
-    box-shadow: 0 0 10px 0 rgba( 136, 133, 133, 0.479 );
+    box-shadow: 0 0 10px 0 rgba(136, 133, 133, 0.479);
 }
 
 .preview {
     padding: 30px;
     flex-grow: 1;
     overflow: auto;
-    box-shadow: 0 0 15px 0 rgba( 136, 133, 133, 0.479 );
+    box-shadow: 0 0 15px 0 rgba(136, 133, 133, 0.479);
     background-color: white;
 }
 
 .preview .inline-code {
     background-color: #F9F2F4;
-    color: #C7254E;
+    color: #c6244d;
     padding: 0 4px;
     border-radius: 4px;
-    font-family: consolas, monospace;
+    font-family: 'Source Code Pro', consolas, monospace;
 }
 
 .preview .block-code {
-    background-color: #F3F3F3;
-    background: url(image/blueprint.png);
+    background: url(image/blueprint.png) #f2f2f2;
     padding: 15px;
-    font-family: consolas, monospace;
+    font-family: 'Source Code Pro', consolas, monospace;
+    margin: 10px auto;
+    border-radius: 5px;
 }
 
 .preview blockquote {
-    border-left: 4px solid #009A61;
-    background-color: #F6F6F6;
+    border-left: 6px solid #009a61;
+    background-color: #f6f6f6;
     padding: 15px;
-    margin: 6px 0;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
-.preview
-h1
-h2
-h3
-h4
-h5
-h6
-{
-    margin: 10px 0;
+.preview h1, h2, h3, h4, h5, h6 {
+    margin: 10px auto;
 }
 
 .preview img {
-    box-shadow: 0 0 10px 0 rgba( 136, 133, 133, 0.12 );
+    box-shadow: 0 0 10px 1px rgba(136, 133, 133, 0.3);
+    margin: 10px auto;
 }
 
 .preview a {
@@ -91,38 +84,44 @@ h6
 }
 
 .preview a:hover {
-    color: #009A61;
+    color: #005032;
     text-decoration: underline;
 }
 
 .preview hr {
+    background-color: #e0e0e0;
     margin: 10px 0;
 }
 
-.preview ul {
+.preview ul, ol {
     padding-left: 2em;
+    margin: 15px auto;
 }
 
-.btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50px;
-    border: 1px solid black;
-    outline: none;
-    background: url(image/arrow.png) center center no-repeat;
-    transition: background-color .3s;
-    cursor: pointer;
+.preview p {
+    margin-bottom: 6px;
 }
 
-.btn:hover {
-    background-color: #e0e0e0;
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+    width: 10px;
+    height: 10px;
+    background-color: #F5F5F5;
 }
 
-.fixed {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+    background-color: #777;
 }
